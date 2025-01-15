@@ -15,7 +15,7 @@ const buildUrl = () => (
 );
 
 
-console.log("buildURL=========", buildUrl());
+
 
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
