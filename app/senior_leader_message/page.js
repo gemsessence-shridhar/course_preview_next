@@ -1,4 +1,3 @@
-
 import { Container, Row, Col } from 'react-bootstrap';
 import classNames from 'classnames';
 
@@ -7,20 +6,28 @@ import SeniorLeaderMessageComponent from '../../src/components/CoursePreviews/Se
 
 import getSeniorLeaderMessageData from '../../src/components/CoursePreviews/SeniorLeaderMessagePreview/SeniorLeaderMessageQuery';
 import createApolloClient from "../../apollo_client";
-export const fetchSeniorLeaderMessageData = (async () => {
-  const client = createApolloClient();
 
+// Fetch data function (not exported)
+const fetchSeniorLeaderMessageData = async () => {
+  const client = createApolloClient();
   const {
     seniorLeaderMessageData,
     seniorLeaderMessageGoalsData,
-    } = await getSeniorLeaderMessageData(client, "Level2Course", "blt266ae954b6656986", "blt3f36e622ed180703", "en-us")
+  } = await getSeniorLeaderMessageData(
+    client,
+    "Level2Course",
+    "blt266ae954b6656986",
+    "blt3f36e622ed180703",
+    "en-us"
+  );
 
-    return { seniorLeaderMessageData, seniorLeaderMessageGoalsData }
-});
+  return { seniorLeaderMessageData, seniorLeaderMessageGoalsData };
+};
 
-
+// Async component in the App Router
 export default async function SeniorLeaderMessagePage() {
-  const {seniorLeaderMessageData, seniorLeaderMessageGoalsData }  = await fetchSeniorLeaderMessageData();
+  // Fetch the data here
+  const { seniorLeaderMessageData, seniorLeaderMessageGoalsData } = await fetchSeniorLeaderMessageData();
 
   return (
     <Container fluid className={classNames(styles['senior-leader-message-container'], 'p-0')}>
@@ -28,7 +35,7 @@ export default async function SeniorLeaderMessagePage() {
         <Col sm={12} className="p-0 content-container">
           <SeniorLeaderMessageComponent
             seniorLeaderMessageData={seniorLeaderMessageData}
-            seniorLeaderMessageGoalsData ={seniorLeaderMessageGoalsData}
+            seniorLeaderMessageGoalsData={seniorLeaderMessageGoalsData}
             seniorLeaderMessageCmsId={"blt3f36e622ed180703"}
             courseId={"blt266ae954b6656986"}
             locale={"en-us"}
@@ -37,5 +44,5 @@ export default async function SeniorLeaderMessagePage() {
         </Col>
       </Row>
     </Container>
-  )
+  );
 }
